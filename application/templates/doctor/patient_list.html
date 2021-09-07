@@ -1,0 +1,47 @@
+{% include 'home/header.html' %}
+{% load widget_tweaks %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Digital Health System</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-item nav-link" href="{% url 'dashboard_doctor' %}">Home</a>
+      </li>
+      <li class="nav-item active">
+          <a href="/logout" class="nav-item nav-link"> Logout</a>
+      </li>  
+    </ul>
+  </div>
+</nav>
+<header id="header" class="header">
+    <div class="container">
+      <a class="btn btn-primary" style="float: right;" href="{% url 'dashboard_doctor' %}">Back</a>
+        <h2 style="font-size: 3rem; text-align: center; margin-top: 53px;" > Patient List </h2>
+        <table class="table  table-striped table-hover" style="margin-left: 85px; margin-top: 35px; width: 80%" >
+            <thead class="table-dark" >
+                <tr>
+                    <th>Name</th>
+                    <th>Mobile</th>
+                    <th>Address</th>
+                    <th>Select</th>
+                </tr>
+            </thead>
+                {% for p in patients %}
+                <tr>
+                    <td style="font-size: larger;"> {{p.get_name}}</td>
+                    <td style="font-size: larger;">{{p.mobile}}</td>
+                    <td style="font-size: larger;">{{p.address}}</td>
+                    <td style="font-size: larger;">
+                      <form action="{% url 'patient_selection' %}" method="post">{% csrf_token %}
+                        <input type="hidden" name="doc_id" id="doc_id" step="1" value="{{doc_id}}" />
+                        <input type="hidden" name="patient_id" id="patient_id" step="1" value="{{p.id}}" />
+                        <input type="submit" class="btn btn-success" value="Select" />
+                      </form></td>
+                  </tr>
+                {% endfor %}
+        </table>
+{% include 'home/footer.html' %}

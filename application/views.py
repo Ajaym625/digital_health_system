@@ -74,8 +74,6 @@ def patient_register(request):
 
 
 #User Group
-def is_admin(user):
-    return user.groups.filter(name='ADMIN').exists()
 def is_doctor(user):
     return user.groups.filter(name='DOCTOR').exists()
 def is_patient(user):
@@ -84,25 +82,55 @@ def is_patient(user):
 #after login 
 def post_login_view(request):
     if is_doctor(request.user):
-        accountapproval=models.Doctor.objects.all().filter(user_id=request.user.id)
-        if accountapproval:
-            return redirect('dashboard_doctor')
-        else:
-            return render(request,'doctor/approval_waiting.html')
+        return redirect('dashboard_doctor')
+        
     elif is_patient(request.user):
-        accountapproval=models.Patient.objects.all().filter(user_id=request.user.id)
-        if accountapproval:
-            return redirect('dashboard_patient')
-        else:
-            return render(request,'patient/approval_waiting.html')
-   
+        return redirect('dashboard_patient')
+        
 
+
+##### doctor View Methods 
 @login_required(login_url='doctor/login')
 @user_passes_test(is_doctor)
 def dashboard_doctor_view(request):
     return render(request,'doctor/dashboard_doctor.html')
 
 
+@login_required(login_url='doctor/login')
+@user_passes_test(is_doctor)
+def patient_list(request):
+    patients=models.Patient.objects.filter(doctor_id__isnull=True)
+    doc_id = request.user.id
+    return render(request,'doctor/patient_list.html',{'patients':patients,'doc_id':doc_id})
+
+
+@login_required(login_url='doctor/login')
+@user_passes_test(is_doctor)
+def patient_selection(request):
+    patient=models.Patient.objects.get(id=request.POST.get('patient_id'))
+    if request.method=='POST':
+        patient.doctor_id= request.POST.get('doc_id')
+        patient.save()
+        return redirect('patient_list')
+    return render(request,'doctor/patient_list.html')
+
+
+@login_required(login_url='doctor/login')
+@user_passes_test(is_doctor)
+def visualize_patient(request):
+    patients=models.Patient.objects.filter(doctor_id__isnull=False, doctor_id=request.user.id)
+    return render(request,'doctor/visualize_patient.html',{'patients':patients})
+
+
+@login_required(login_url='doctor/login')
+@user_passes_test(is_doctor)
+def patient_form(request):
+    return render(request,'doctor/patient_form.html')
+
+
+
+
+#####Patient View Methods 
 @login_required(login_url='patient/login')
 @user_passes_test(is_patient)
 def dashboard_patient_view(request):
