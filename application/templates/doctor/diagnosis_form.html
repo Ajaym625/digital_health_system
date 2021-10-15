@@ -1,0 +1,50 @@
+{% include 'home/header.html' %}
+{% load widget_tweaks %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Digital Health System</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-item nav-link" href="{% url 'dashboard_doctor' %}">Home</a>
+      </li>
+      <li class="nav-item active">
+          <a href="/logout" class="nav-item nav-link"> Logout</a>
+      </li>  
+    </ul>
+  </div>
+</nav>
+<header id="header" class="header">
+    <div class="container">
+      <a class="btn btn-primary" style="float: right;" href="{% url 'visualize_patient' %}">Back</a>
+        <h2 style="font-size: 3rem; text-align: center; margin-top: 53px;" ><span style="color: rgb(6, 240, 169);"> Auto Diagnosis</span></h2>
+            <form style="margin-left: 100px; margin-top:50px; " action="{%url 'auto_diagnosis'%}" method="post"  id="myform" >
+                {% csrf_token%}
+                <table class="table  table-striped table-bordered table-hover" style="margin-left: 5px; margin-top: 35px; width: 90%" >
+                    <thead class="table-dark" >
+                        <tr>
+                            <th>CheckBox</th>
+                            <th>Sintomo</th>
+                        </tr>
+                    </thead>
+                    {% for d in dataset%}
+                        <tr>
+                            <td style="font-size: large;"><div class="form-check form-check-inline">
+                                <input class="form-check-input" id="input" name="input" type="checkbox" value="{{d.codice_sintomo}}" >
+                                <!-- <input type="hidden" name="output" id="output" step="1" value="{{d.patologia}}" />
+                                <input type="hidden" name="weight" id="weight" step="1" value="{{d.sintomo_principale}}" /> -->
+                            </td>                                
+                            <td style="font-size: large;"><label class="form-check-label" for="flexCheckChecked">{{d.sintomo}}</label></div></td>
+                        </tr>
+                        {% endfor %}
+                </table>
+                    <input type="submit" style="margin-left: 440px;" class="btn btn-success" value="Submit" />
+            </form>
+           
+{% include 'home/footer.html' %}
+
+
+

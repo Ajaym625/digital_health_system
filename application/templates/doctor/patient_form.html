@@ -20,11 +20,18 @@
 </nav>
 <header id="header" class="header">
     <div class="container">
-        <div class="row">
+      <a class="btn btn-primary" style="float: right;" href="{% url 'visualize_patient' %}">Back</a>
+        <div class="row" style="margin-left: 100px;" >
             <div class="text-container" >
-                <h1 class="h1-large">Patient form page for third view case</h1>
-            </div>
-        </div><!-- </div> end of text-container -->
+                <h1 class="h1-large">Please Select the form</h1>
+                <div class="wrapper" style="margin-left: 130px;">
+                  <!-- <input type="hidden" name="patient_id" id="patient_id" step="1" value="{{p_id}}" />
+                  <input type="hidden" name="patient_name" id="patient_name" step="1" value="{{p_name}}" /> -->
+                  <a class="btn-solid-lg" href="{% url 'anamnesi_personale' %}?pid=p_id={{p_id}}&pname={{p_name}}">Anamnesi Personale</a>
+                  <a class="btn-solid-lg secondary" href="{% url 'patient_landing' %}">Anamnesi Familiare(Future Work)</a>
+                </div>
+               
+              </div><!-- </div> end of text-container -->
             
     {% include 'home/footer.html' %}
     

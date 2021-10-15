@@ -27,6 +27,8 @@
                     <th>Name</th>
                     <th>Mobile</th>
                     <th>Address</th>
+                    <th>Quick Diagnosis</th>
+                    <th>History</th>
                     <th>Select</th>
                 </tr>
             </thead>
@@ -36,11 +38,13 @@
                     <td style="font-size: larger;">{{p.mobile}}</td>
                     <td style="font-size: larger;">{{p.address}}</td>
                     <!-- <td style="font-size: larger;"> -->
-                    <td style="font-size: larger;"><a class="btn btn-success" href="{% url 'patient_form' %}">Select</a>  </td> 
+                      <td style="font-size: larger;"><a class="btn btn-warning" href="{% url 'diagnosis_form' %}?pid={{p.id}}">Diagnosis</a>  </td>
+                      <td style="font-size: larger;"><a class="btn btn-primary" href="{% url 'patient_pdf_doc' %}?pid={{p.id}}">History</a>  </td>
+                      <td style="font-size: larger;"><a class="btn btn-success" href="{% url 'patient_form' %}?pid={{p.id}}&pname={{p.get_name}}">Anamnesi Personale</a></td> 
+                      
                       <!-- <form action="{% url 'patient_selection' %}" method="post">{% csrf_token %}
-                        <input type="hidden" name="doc_id" id="doc_id" step="1" value="{{doc_id}}" />
-                        <input type="hidden" name="patient_id" id="patient_id" step="1" value="{{p.id}}" />
                         <input type="submit" class="btn btn-success" value="Select" />
+                        <input type="hidden" name="doc_id" id="doc_id" step="1" value="{{doc_id}}" />
                       </form></td> -->
                   </tr>
                 {% endfor %}

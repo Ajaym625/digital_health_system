@@ -22,7 +22,8 @@ class Patient(models.Model):
     profile_pic= models.ImageField(upload_to='profile_pic/PatientProfilePic/',null=True,blank=True)
     address = models.CharField(max_length=40)
     mobile = models.CharField(max_length=20,null=False)
-    doctor_id  = models.PositiveIntegerField(null=True)
+    doctor_id  = models.PositiveIntegerField(blank=True, null=True)
+    anamnesi_personale = models.FileField(upload_to='files/',null=True, blank=True)
     @property
     def get_name(self):
         return self.user.first_name+" "+self.user.last_name
@@ -30,4 +31,14 @@ class Patient(models.Model):
     def get_id(self):
         return self.user.id
     def __str__(self):
-        return "{} ({})".format(self.user.first_name)
+        return "{}".format(self.user.first_name)
+
+class dataset(models.Model):
+    codice_patologia = models.CharField(max_length=255)
+    patologia = models.CharField(max_length=255)
+    codice_sintomo = models.CharField(max_length=255)
+    sintomo = models.CharField(max_length=255)
+    sintomo_principale = models.CharField(max_length=255)
+    def _str_(self):
+        return self.codice_patologia
+

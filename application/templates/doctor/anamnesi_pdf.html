@@ -1,0 +1,360 @@
+<head>
+	<style>
+		@page {
+			size: a4 portrait;
+			@frame header_frame {           /* Static Frame */
+				-pdf-frame-content: header_content;
+				left: 50pt; width: 512pt; top: 50pt; height: 40pt;
+			}
+			@frame content_frame {          /* Content Frame */
+				left: 50pt; width: 512pt; top: 90pt; height: 632pt;
+			}
+			@frame footer_frame {           /* Another static Frame */
+				-pdf-frame-content: footer_content;
+				left: 50pt; width: 512pt; top: 772pt; height: 20pt;
+			}
+		}
+		
+	</style>
+	
+	</head>
+	<body>
+	
+	<!-- Content for Static Frame 'header_frame' -->
+	<div id="header_content">
+		<h3>Anamnesi Personale of {{p_id}} {{p_name}}</h3>
+		</div>
+		
+		<!-- Content for Static Frame 'footer_frame' -->
+		<div id="footer_content">(c) - page <pdf:pagenumber>
+			of <pdf:pagecount>
+			</div>
+			
+			<div class="form-group row">
+    			<label for="staticEmail" class="col-sm-2 col-form-label">Nato_da_parto_naturale</label>: {{Nato_da_parto_naturale}}
+  			</div>
+			<div class="form-group row">
+    			<label for="staticEmail" class="col-sm-2 col-form-label">Allattamento al seno</label>: {{Allattamento_al_seno}}
+			</div>
+			<div class="form-group row">
+    			<label for="staticEmail" class="col-sm-2 col-form-label">Mestruazioni</label>: {{Mestruazioni}}
+			</div>
+			<hr>
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th>Età menarca</th>	
+						<td>{{Età_menarca}}</td>
+					</tr>
+					<tr>
+						<th>Frequenza</th>	
+						<td>{{Frequenza}}</td>
+					</tr>
+					<tr>
+						<th>Durata</th>	
+						<td>{{Durata}}</td>
+					</tr>
+					<tr>
+						<th>Quantità</th>	
+						<td>{{Quantità}}</td>
+					</tr>
+					<tr>
+						<th>Ultima_mestruszione</th>	
+						<td>{{Ultima_mestruszione}}</td>
+					</tr>
+				</thead>
+			</table>
+			<hr>
+
+			
+
+			<div class="form-group row">
+    			<label for="staticEmail" class="col-sm-2 col-form-label">Gravidanza</label>: {{Gravidanza}}
+  			</div>
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th>Data_parto</th>	
+						<td>{{Data_parto}}</td>
+					</tr>
+					<tr>
+						<th>Modalità</th>	
+						<td>{{Modalità}}</td>
+					</tr>
+					<tr>
+						<th>Puerperio</th>	
+						<td>{{Puerperio}}</td>
+					</tr>
+				</thead>
+			</table>
+			<hr>
+
+
+			<div class="form-group row">
+    			<label for="staticEmail" class="col-sm-2 col-form-label">Abitudini_alimentari_regolari</label>: {{Abitudini_alimentari_regolari}}
+  			</div>
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th>Tipologia_disturbo1</th>	
+						<td>{{Tipologia_disturbo1}}</td>
+					</tr>
+					<tr>
+						<th>Età_comparsa1</th>	
+						<td>{{Età_comparsa1}}</td>
+					</tr>
+				</thead>
+			</table>
+			<hr>
+
+
+
+
+			<div class="form-group row">
+    			<label for="staticEmail" class="col-sm-2 col-form-label">Intolleranze_alimentaro</label>: {{Intolleranze_alimentaro}}
+  			</div>
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th>Tipologia_disturbo</th>	
+						<td>{{Tipologia_disturbo2}}</td>
+					</tr>
+					<tr>
+						<th>Età_comparsa</th>	
+						<td>{{Età_comparsa2}}</td>
+					</tr>
+				</thead>
+			</table>
+			<hr>
+
+			<div class="form-group row">
+    			<label for="staticEmail" class="col-sm-2 col-form-label">Fuma</label>: {{Fuma}}
+  			</div>
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th>Da_quanti_anni</th>	
+						<td>{{Da_quanti_anni}}</td>
+					</tr>
+					<tr>
+						<th>Numero_sigarette_giornaliere</th>	
+						<td>{{Numero_sigarette_giornaliere}}</td>
+					</tr>
+				</thead>
+			</table>
+		<hr>	
+
+
+
+			<div class="form-group row">
+    			<label for="staticEmail" class="col-sm-2 col-form-label">Assume_Alcol</label>: {{Assume_Alcol}}
+  			</div>
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th>Tipologia_consumo</th>	
+						<td>{{Tipologia_consumo1}}</td>
+					</tr>
+					<tr>
+						<th>Età_inizio</th>	
+						<td>{{Età_inizio1}}</td>
+					</tr>
+				</thead>
+			</table>
+			<hr>
+
+			<div class="form-group row">
+    			<label for="staticEmail" class="col-sm-2 col-form-label">Assuma_droga</label>: {{Assuma_droga}}
+  			</div>
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th>Tipologia_consumo</th>	
+						<td>{{Tipologia_consumo2}}</td>
+					</tr>
+					<tr>
+						<th>Età_inizio</th>	
+						<td>{{Età_inizio2}}</td>
+					</tr>
+				</thead>
+			</table>
+			<hr>			
+
+
+			<div class="form-group row">
+    			<label for="staticEmail" class="col-sm-2 col-form-label">Vaccinazioni_regolari</label>: {{Vaccinazioni_regolari}}
+  			</div>
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th>Vaccini_non_effettuati</th>	
+						<td>{{Vaccini_non_effettuati}}</td>
+					</tr>
+					<tr>
+						<th>vaccini_note</th>	
+						<td>{{vaccini_note}}</td>
+					</tr>
+				</thead>
+			</table>
+			<hr>
+
+			<div class="form-group row">
+    			<label for="staticEmail" class="col-sm-2 col-form-label">Ritmo_sonno_veglia_regolare</label>: {{Ritmo_sonno_veglia_regolare}}
+  			</div>
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th>Tipologia_disturbo</th>	
+						<td>{{Tipologia_disturbo3}}</td>
+					</tr>
+					<tr>
+						<th>Frequenza</th>	
+						<td>{{Frequenza2}}</td>
+					</tr>
+				</thead>
+			</table>
+			<hr>			
+
+
+
+
+			<div class="form-group row">
+    			<label for="staticEmail" class="col-sm-2 col-form-label">Diuresi_regolare</label>: {{Diuresi_regolare}}
+  			</div>
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th>Tipologia_problema</th>	
+						<td>{{Tipologia_problema}}</td>
+					</tr>
+					<tr>
+						<th>Data_in_cui_si_è_manifestato</th>	
+						<td>{{Data_in_cui_si_è_manifestato}}</td>
+					</tr>
+				</thead>
+			</table>
+			<hr>
+			
+			<div class="form-group row">
+    			<label for="staticEmail" class="col-sm-2 col-form-label">Ha_mai_subito_interventi</label>: {{Ha_mai_subito_interventi}}
+  			</div>
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th>Tipologia_intervento</th>	
+						<td>{{Tipologia_intervento}}</td>
+					</tr>
+					<tr>
+						<th>Patologia_trattata</th>	
+						<td>{{Patologia_trattata}}</td>
+					</tr>
+					<tr>
+						<th>Anno intervento</th>	
+						<td>{{Anno_intervento}}</td>
+					</tr>
+				</thead>
+			</table>
+			<hr>			
+
+
+			<div class="form-group row">
+    			<label for="staticEmail" class="col-sm-2 col-form-label">Malattia_dell'infanzia</label>: {{Malattia_dell_infanzia}}
+  			</div>
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th>Malattia</th>	
+						<td>{{Malattia}}</td>
+					</tr>
+					<tr>
+						<th>Eta_in_cui_si_è_manifestat</th>	
+						<td>{{Eta_in_cui_si_è_manifestat}}</td>
+					</tr>
+				</thead>
+			</table>
+			<hr>
+			
+			<div class="form-group row">
+    			<label for="staticEmail" class="col-sm-2 col-form-label">Ha_mai_subito_traumi</label>: {{Ha_mai_subito_traumi}}
+  			</div>
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th>Tipologia_trauma</th>	
+						<td>{{Tipologia_trauma}}</td>
+					</tr>
+					<tr>
+						<th>Causa</th>	
+						<td>{{Causa}}</td>
+					</tr>
+					<tr>
+						<th>Anno_trauma</th>	
+						<td>{{Anno_trauma}}</td>
+					</tr>
+				</thead>
+			</table>
+			<hr>			
+
+
+
+			<div class="form-group row">
+    			<label for="staticEmail" class="col-sm-2 col-form-label">E'_cardiopatica</label>: {{E_cardiopatica}}
+  			</div>
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th>Problema_cardiologica</th>	
+						<td>{{Problema_cardiologica}}</td>
+					</tr>
+					<tr>
+						<th>Da_quanto_tempo</th>	
+						<td>{{Da_quanto_tempo2}}</td>
+					</tr>
+				</thead>
+			</table>
+			<hr>
+			
+			<div class="form-group row">
+    			<label for="staticEmail" class="col-sm-2 col-form-label">Assume_farmaci</label>: {{Assume_farmaci}}
+  			</div>
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th>Fermaco</th>	
+						<td>{{Fermaco}}</td>
+					</tr>
+					<tr>
+						<th>Dosaggio</th>	
+						<td>{{Dosaggio}}</td>
+					</tr>
+					<tr>
+						<th>Frequenza</th>	
+						<td>{{Frequenza3}}</td>
+						</tr>
+				</thead>
+			</table>
+			<hr>
+
+
+
+
+			<div class="form-group row">
+    			<label for="staticEmail" class="col-sm-2 col-form-label">Altre_patologie</label>: {{Altre_patologie}}
+  			</div>
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th>Patologie</th>	
+						<td>{{Patologie}}</td>
+					</tr>
+					<tr>
+						<th>Da_quanto_tempo</th>	
+						<td>{{Da_quanto_tempo3}}</td>
+					</tr>
+				</thead>
+			</table>
+			<hr>
+	
+	
+	</body>
+	</html>

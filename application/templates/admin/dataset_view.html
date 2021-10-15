@@ -1,0 +1,51 @@
+{% include 'home/header.html' %}
+{% load widget_tweaks %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Digital Health System</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-item nav-link" href="{% url 'dashboard_doctor' %}">Home</a>
+      </li>
+      <li class="nav-item active">
+          <a href="/logout" class="nav-item nav-link"> Logout</a>
+      </li>  
+    </ul>
+  </div>
+</nav>
+<header id="header" class="header">
+    <div class="container">
+      <a class="btn btn-primary" style="float: right;" href="{% url 'administrator' %}">Back</a>
+      <a class="btn btn-success" style="float: left;" href="{% url 'add_dataset' %}">Add dataset</a>
+        <h2 style="font-size: 3rem; text-align: center; margin-top: 53px;" > Dataset </h2>
+        <table class="table table-striped table-bordered  table-hover" style="margin-left: 75px; margin-top: 35px; width: 90%; background: WHITESMOKE " >
+            <thead class="table-dark" >
+                <tr>
+                    <!-- <th>Id</th> -->
+                    <th>Codice Patologia</th>
+                    <th>Patologia (output)</th>
+                    <th>Codice sintomo</th>
+                    <th>Sintomo (input)</th>
+                    <th>Sintomo principale</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+                {% for d in dataset %}
+                <tr>
+                    <!-- <td style="font-size: larger;">{{d.id}}</td> -->
+                    <td style="font-size: larger;">{{d.codice_patologia}}</td>
+                    <td style="font-size: larger;">{{d.patologia}}</td>
+                    <td style="font-size: larger;">{{d.codice_sintomo}}</td>
+                    <td style="font-size: larger;">{{d.sintomo}}</td>
+                    <td style="font-size: larger;">{{d.sintomo_principale}}</td>
+                    <td style="font-size: larger;"><a class="btn btn-primary" href="{%url 'edit_dataset'%}?id={{d.id}}">Edit</a>  </td>
+                    <td style="font-size: larger;"><a class="btn btn-danger" href="{% url 'delete_dataset'%}?id={{d.id}}">Delete</a>  </td>
+                  </tr>
+                {% endfor %}
+        </table>
+{% include 'home/footer.html' %}

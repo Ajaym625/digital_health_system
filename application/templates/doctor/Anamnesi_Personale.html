@@ -1,0 +1,902 @@
+{%load static%}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Anamnesi Personale</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- Bootstrap link -->
+		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/polyfills.umd.js"></script>
+		<link rel="stylesheet" href="{% static 'home/js/html2canvas.js'  %}">
+
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+		<!-- MATERIAL DESIGN ICONIC FONT -->
+		<link rel="stylesheet" href="{% static 'home/fonts/material-design-iconic-font/css/material-design-iconic-font.css'  %}">
+
+		<!-- DATE-PICKER -->
+		<link rel="stylesheet" href="{% static 'home/vendor/date-picker/css/datepicker.min.css'  %}">
+
+		<!-- STYLE CSS -->
+		<link rel="stylesheet" href="{% static 'home/css/style.css'  %}">
+
+		<!--   -->
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
+	</head>
+	<body style="height: 100%;">
+		<script>
+			function addRow(ele) {
+				var root = document.getElementById(ele).getElementsByTagName('tbody')[0];
+				var rows = root.getElementsByTagName('tr');
+				var clone = cloneEl(rows[rows.length - 1]);
+				cleanUpInputs(clone);
+				root.appendChild(clone);
+				}
+			function cloneEl(el) {
+  				var clo = el.cloneNode(true);
+  				return clo;
+				}
+
+			function cleanUpInputs(obj) {
+  				for (var i = 0; n = obj.childNodes[i]; ++i) {
+    				if (n.childNodes && n.tagName != 'INPUT') {
+      					// cleanUpInputs(n);
+    				} else if (n.tagName == 'INPUT' && n.type == 'text') {
+      					n.value = '';
+    				}
+  				}  
+			}
+			
+		</script>
+		<div class="wrapper" style="display: inline; " >
+			<div class="image-holder">
+				<!-- <img src="{% static 'home/images/form-wizard.png' %}" alt="" > -->
+			</div>
+            <form style="margin-left: 240px; width: 65.93%" action="" method="post"  id="myform"  onSubmit="return onSubmit(this)"  >
+				{% csrf_token %}
+				<a class="btn btn-primary" style="float: right;" href="{% url 'patient_form' %}">Back</a>
+            	<div class="form-header"  >
+            		<a href="#">Hello {{p_name}}</a>
+            		<h3>Anamnesi Personale</h3>
+            	</div>
+            	<div id="wizard" style=" border-radius: 50px; padding: 40px 40px 40px 40px;">
+            		<!-- SECTION 1 -->
+	                <h4></h4>
+	                <section>
+	                    <div class="form-row" style="margin-bottom: 20px; flex-flow: nowrap">
+	                    	<label for="">
+	                    		Nato da parto naturale?
+	                    	</label>
+	                    	<div class="form-holder">
+	                    		<div class="checkbox-circle" style=" display: grid; justify-content: center">								
+									<label class="yes">
+										<input type="radio" name="Nato_da_parto_naturale" value="Si" checked>Si<br>
+										<span class="checkmark"></span>
+									</label>
+									<label class="no">
+										<input type="radio" name="Nato_da_parto_naturale" value="No"> No<br>
+										<span class="checkmark"></span>
+									</label>
+								</div>
+	                    	</div>
+	                    </div>	
+						<div class="form-row" style="margin-bottom: 20px; flex-flow: nowrap">
+	                    	<label for="">
+	                    		Allattamento al seno?
+	                    	</label>
+	                    	<div class="form-holder">
+	                    		<div class="checkbox-circle" style=" display: grid; justify-content: center">								
+									<label class="yes">
+										<input type="radio" name="Allattamento_al_seno" value="Si" checked>Si<br>
+										<span class="checkmark"></span>
+									</label>
+									<label class="no">
+										<input type="radio" name="Allattamento_al_seno" value="No"> No<br>
+										<span class="checkmark"></span>
+									</label>
+								</div>
+	                    	</div>
+	                    </div>	
+						<div class="form-row" style="margin-bottom: 20px; flex-flow: nowrap;">
+	                    	<label for="">
+	                    		Mestruazioni
+	                    	</label>
+	                    	<div class="form-holder">
+	                    		<div class="checkbox-circle" style=" display: grid;justify-content: center">								
+									<label class="yes">
+										<input type="radio" name="Mestruazioni" value="Si" checked>Si<br>
+										<span class="checkmark"></span>
+									</label>
+									<label class="no">
+										<input type="radio" name="Mestruazioni" value="No"> No<br>
+										<span class="checkmark"></span>
+									</label>
+								</div>
+	                    	</div>
+	                    </div>	
+	                    <div class="form-row"  style="margin-bottom: 20px; flex-flow: nowrap">
+	                    	<div class="form-holder">
+	                    		<table id="mytable"  class="table table-bordered " style="width: 150%; color: #ffffff" >
+									<thead class="table-dark">
+									  <tr >
+										<th rowspan="2">Età menarca</th>
+										<th colspan="3" style="text-align:center" >Ciclo mestruale</th>
+										<th rowspan="2">Ultima mestruszione</th>
+									  </tr>
+									  <tr>
+										<td>Frequenza</td>
+										<td>Durata</td>
+										<td>Quantità</td>
+									  </tr>
+									</thead>
+									<tbody>
+									  <tr>
+										<th><input  class="form-control" type="text" name="Età_menarca"></th>
+										<td><input class="form-control" type="text" name="Frequenza1"></td>
+										<td><input class="form-control" type="text" name="Durata"></td>
+										<td><input class="form-control" type="text" name="Quantità"></td>
+										<td><input class="form-control" type="text" name="Ultima_mestruszione"></td>
+									  </tr>
+									  
+									</tbody>
+								</table>
+								<input style="border-radius: 25%; padding: 0px 10px" id="mytable" class="w3-button w3-xlarge w3-circle w3-black" type="button" value="+" onclick="addRow(this.id)">
+	                    	</div>
+	                    </div>	
+	                  		
+	                </section>
+	                
+					<!-- SECTION 2 -->
+	                <h4></h4>
+	                <section>
+						<div class="form-row" style="margin-bottom: 20px; flex-flow: nowrap">
+	                    	<label for="">
+	                    		Gravidanza?
+	                    	</label>
+	                    	<div class="form-holder">
+	                    		<div class="checkbox-circle" style=" display: grid; justify-content: center">								
+									<label class="yes">
+										<input type="radio" name="Gravidanza" value="Si" checked>Si<br>
+										<span class="checkmark"></span>
+									</label>
+									<label class="no">
+										<input type="radio" name="Gravidanza" value="No"> No<br>
+										<span class="checkmark"></span>
+									</label>
+								</div>
+	                    	</div>
+	                    </div>	
+						<div class="form-row"  style="margin-bottom: 20px; flex-flow: nowrap">
+							<div class="form-holder">
+								<table id="mytable1"  class="table table-bordered " style="width: 150%; color: #ffffff" >
+									<thead class="table-dark">
+									  <tr >
+										<th rowspan="2">Data parto</th>
+										<th rowspan="2">Modalità</th>
+										<th rowspan="2">Puerperio</th>
+									  </tr>
+									</thead>
+									<tbody>
+									  <tr>
+										<th><input  class="form-control" data-language='en' name="Data_parto"  data-date-format="dd - mm - yyyy" id="dp1"></th>
+										<td><input class="form-control" type="text" name="Modalità"></td>
+										<td><input class="form-control" type="text" name="Puerperio"></td>
+									  </tr>
+									  
+									</tbody>
+								</table>
+								<input style="border-radius: 25%; padding: 0px 10px" id="mytable1" class="w3-button w3-xlarge w3-circle w3-black" type="button" value="+" onclick="addRow(this.id)">
+							</div>
+						</div>	
+						<div class="form-row" style="margin-bottom: 20px; flex-flow: nowrap">
+	                    	<label for="">
+	                    		Abitudini alimentari regolari?
+	                    	</label>
+	                    	<div class="form-holder">
+	                    		<div class="checkbox-circle" style=" display: grid; justify-content: center">								
+									<label class="yes">
+										<input type="radio" name="Abitudini_alimentari_regolari" value="Si" checked>Si<br>
+										<span class="checkmark"></span>
+									</label>
+									<label class="no">
+										<input type="radio" name="Abitudini_alimentari_regolari" value="No"> No<br>
+										<span class="checkmark"></span>
+									</label>
+								</div>
+	                    	</div>
+	                    </div>	
+						<div class="form-row"  style="margin-bottom: 20px; flex-flow: nowrap">
+							<div class="form-holder">
+								<table id="mytable2"  class="table table-bordered " style="width: 150%; color: #ffffff" >
+									<thead class="table-dark">
+									  <tr >
+										<th rowspan="2">Tipologia disturbo</th>
+										<th rowspan="2">Età comparsa</th>
+									  </tr>
+									</thead>
+									<tbody>
+									  <tr>
+										<td><input class="form-control" type="text" name="Tipologia_disturbo1"></td>
+										<td><input class="form-control" type="text" name="Età_comparsa1"></td>
+									  </tr>
+									  
+									</tbody>
+								</table>
+								<input style="border-radius: 25%; padding: 0px 10px" id="mytable2" class="w3-button w3-xlarge w3-circle w3-black" type="button" value="+" onclick="addRow(this.id)">
+							</div>
+						</div>	
+	                  		
+	                </section>
+
+
+					<!-- SECTION 3 -->
+					<h4></h4>
+					<section>
+						<div class="form-row" style="margin-bottom: 20px; flex-flow: nowrap">
+							<label for="">
+								Intolleranze alimentaro?
+							</label>
+							<div class="form-holder">
+								<div class="checkbox-circle" style=" display: grid; justify-content: center">								
+									<label class="yes">
+										<input type="radio" name="Intolleranze_alimentaro" value="Si" checked>Si<br>
+										<span class="checkmark"></span>
+									</label>
+									<label class="no">
+										<input type="radio" name="Intolleranze_alimentaro" value="No"> No<br>
+										<span class="checkmark"></span>
+									</label>
+								</div>
+							</div>
+						</div>	
+						<div class="form-row"  style="margin-bottom: 20px; flex-flow: nowrap">
+							<div class="form-holder">
+								<table id="mytable3"  class="table table-bordered " style="width: 150%; color: #ffffff" >
+									<thead class="table-dark">
+									<tr >
+										<th rowspan="2">Tipologia disturbo</th>
+										<th rowspan="2">Età comparsa</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr>
+										<td><input class="form-control" type="text" name="Tipologia_disturbo2"></td>
+										<td><input class="form-control" type="text" name="Età_comparsa2"></td>
+									</tr>
+									
+									</tbody>
+								</table>
+								<input style="border-radius: 25%; padding: 0px 10px" id="mytable3" class="w3-button w3-xlarge w3-circle w3-black" type="button" value="+" onclick="addRow(this.id)">
+							</div>
+						</div>	
+						<div class="form-row" style="margin-bottom: 20px; flex-flow: nowrap">
+							<label for="">
+								Fuma?
+							</label>
+							<div class="form-holder">
+								<div class="checkbox-circle" style=" display: grid; justify-content: center">								
+									<label class="yes">
+										<input type="radio" name="Fuma" value="Si" checked>Si<br>
+										<span class="checkmark"></span>
+									</label>
+									<label class="no">
+										<input type="radio" name="Fuma" value="No"> No<br>
+										<span class="checkmark"></span>
+									</label>
+								</div>
+							</div>
+						</div>	
+						<div class="form-row"  style="margin-bottom: 20px; flex-flow: nowrap">
+							<div class="form-holder">
+								<table id="mytable4"  class="table table-bordered " style="width: 150%; color: #ffffff" >
+									<thead class="table-dark">
+									<tr >
+										<th rowspan="2">Da quanti anni</th>
+										<th rowspan="2">Numero sigarette giornaliere</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr>
+										<td><input class="form-control" type="text" name="Da_quanti_anni"></td>
+										<td><input class="form-control" type="text" name="Numero_sigarette_giornaliere"></td>
+									</tr>
+									
+									</tbody>
+								</table>
+								<input style="border-radius: 25%; padding: 0px 10px" id="mytable4" class="w3-button w3-xlarge w3-circle w3-black" type="button" value="+" onclick="addRow(this.id)">
+							</div>
+						</div>				
+					</section>
+
+					<!-- SECTION 4 -->
+					<h4></h4>
+					<section>
+						<div class="form-row" style="margin-bottom: 20px; flex-flow: nowrap">
+							<label for="">
+								Assume Alcol?
+							</label>
+							<div class="form-holder">
+								<div class="checkbox-circle" style=" display: grid; justify-content: center">								
+									<label class="yes">
+										<input type="radio" name="Assume_Alcol" value="Si" checked>Si<br>
+										<span class="checkmark"></span>
+									</label>
+									<label class="no">
+										<input type="radio" name="Assume_Alcol" value="No"> No<br>
+										<span class="checkmark"></span>
+									</label>
+								</div>
+							</div>
+						</div>	
+						<div class="form-row"  style="margin-bottom: 20px; flex-flow: nowrap">
+							<div class="form-holder">
+								<table id="mytable5"  class="table table-bordered " style="width: 150%; color: #ffffff" >
+									<thead class="table-dark">
+									<tr >
+										<th rowspan="2">Tipologia consumo</th>
+										<th rowspan="2">Età inizio</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr>
+										<td><input class="form-control" type="text" name="Tipologia_consumo1"></td>
+										<td><input class="form-control" type="text" name="Età_inizio1"></td>
+									</tr>
+									
+									</tbody>
+								</table>
+								<input style="border-radius: 25%; padding: 0px 10px" id="mytable5" class="w3-button w3-xlarge w3-circle w3-black" type="button" value="+" onclick="addRow(this.id)">
+							</div>
+						</div>	
+						<div class="form-row" style="margin-bottom: 20px; flex-flow: nowrap">
+							<label for="">
+								Assuma droga?
+							</label>
+							<div class="form-holder">
+								<div class="checkbox-circle" style=" display: grid; justify-content: center">								
+									<label class="yes">
+										<input type="radio" name="Assuma_droga" value="Si" checked>Si<br>
+										<span class="checkmark"></span>
+									</label>
+									<label class="no">
+										<input type="radio" name="Assuma_droga" value="No"> No<br>
+										<span class="checkmark"></span>
+									</label>
+								</div>
+							</div>
+						</div>	
+						<div class="form-row"  style="margin-bottom: 20px; flex-flow: nowrap">
+							<div class="form-holder">
+								<table id="mytable6"  class="table table-bordered " style="width: 150%; color: #ffffff" >
+									<thead class="table-dark">
+									<tr >
+										<th rowspan="2">Tipologia consumo</th>
+										<th rowspan="2">Età inizio</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr>
+										<td><input class="form-control" type="text" name="Tipologia_consumo2"></td>
+										<td><input class="form-control" type="text" name="Età_inizio2"></td>
+									</tr>
+									
+									</tbody>
+								</table>
+								<input style="border-radius: 25%; padding: 0px 10px" id="mytable6" class="w3-button w3-xlarge w3-circle w3-black" type="button" value="+" onclick="addRow(this.id)">
+							</div>
+						</div>				
+					</section>
+
+					<!-- SECTION 5 -->
+					<h4></h4>
+					<section>
+						<div class="form-row" style="margin-bottom: 20px; flex-flow: nowrap">
+							<label for="">
+								Vaccinazioni regolari?
+							</label>
+							<div class="form-holder">
+								<div class="checkbox-circle" style=" display: grid; justify-content: center">								
+									<label class="yes">
+										<input type="radio" name="Vaccinazioni_regolari" value="Si" checked>Si<br>
+										<span class="checkmark"></span>
+									</label>
+									<label class="no">
+										<input type="radio" name="Vaccinazioni_regolari" value="No"> No<br>
+										<span class="checkmark"></span>
+									</label>
+								</div>
+							</div>
+						</div>	
+						<div class="form-row"  style="margin-bottom: 20px; flex-flow: nowrap">
+							<div class="form-holder">
+								<table id="mytable7"  class="table table-bordered " style="width: 150%; color: #ffffff" >
+									<thead class="table-dark">
+									<tr >
+										<th rowspan="2">Vaccini non effettuati</th>
+										<th rowspan="2">vaccini_note</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr>
+										<td><input class="form-control" type="text" name="Vaccini_non_effettuati"></td>
+										<td><input class="form-control" type="text" name="vaccini_note"></td>
+									</tr>
+									
+									</tbody>
+								</table>
+								<input style="border-radius: 25%; padding: 0px 10px" id="mytable7" class="w3-button w3-xlarge w3-circle w3-black" type="button" value="+" onclick="addRow(this.id)">
+							</div>
+						</div>	
+						<div class="form-row" style="margin-bottom: 20px; flex-flow: nowrap">
+							<label for="">
+								Ritmo sonno veglia regolare?
+							</label>
+							<div class="form-holder">
+								<div class="checkbox-circle" style=" display: grid; justify-content: center">								
+									<label class="yes">
+										<input type="radio" name="Ritmo_sonno_veglia_regolare" value="Si" checked>Si<br>
+										<span class="checkmark"></span>
+									</label>
+									<label class="no">
+										<input type="radio" name="Ritmo_sonno_veglia_regolare" value="No"> No<br>
+										<span class="checkmark"></span>
+									</label>
+								</div>
+							</div>
+						</div>	
+						<div class="form-row"  style="margin-bottom: 20px; flex-flow: nowrap">
+							<div class="form-holder">
+								<table id="mytable8"  class="table table-bordered " style="width: 150%; color: #ffffff" >
+									<thead class="table-dark">
+									<tr >
+										<th rowspan="2">Tipologia disturbo</th>
+										<th rowspan="2">Frequenza</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr>
+										<td><input class="form-control" type="text" name="Tipologia_disturbo3"></td>
+										<td><input class="form-control" type="text" name="Frequenza2"></td>
+									</tr>
+									
+									</tbody>
+								</table>
+								<input style="border-radius: 25%; padding: 0px 10px" id="mytable8" class="w3-button w3-xlarge w3-circle w3-black" type="button" value="+" onclick="addRow(this.id)">
+							</div>
+						</div>				
+					</section>
+
+					<!-- SECTION 6 -->
+					<h4></h4>
+					<section>
+						<div class="form-row" style="margin-bottom: 20px; flex-flow: nowrap">
+							<label for="">
+								Diuresi regolare?
+							</label>
+							<div class="form-holder">
+								<div class="checkbox-circle" style=" display: grid; justify-content: center">								
+									<label class="yes">
+										<input type="radio" name="Diuresi_regolare" value="Si" checked>Si<br>
+										<span class="checkmark"></span>
+									</label>
+									<label class="no">
+										<input type="radio" name="Diuresi_regolare" value="No"> No<br>
+										<span class="checkmark"></span>
+									</label>
+								</div>
+							</div>
+						</div>	
+						<div class="form-row"  style="margin-bottom: 20px; flex-flow: nowrap">
+							<div class="form-holder">
+								<table id="mytable9"  class="table table-bordered " style="width: 150%; color: #ffffff" >
+									<thead class="table-dark">
+									<tr >
+										<th rowspan="2">Tipologia problema</th>
+										<th rowspan="2">Data in cui si è manifestato</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr>
+										<td><input class="form-control" type="Tipologia_problema" name="Tipologia_problema"></td>
+										<td><input class="form-control" type="Data_in_cui_si_è_manifestato"  data-language='en' data-date-format="dd - mm - yyyy" id="dp1" name="Data_in_cui_si_è_manifestato"></td>
+									</tr>
+									
+									</tbody>
+								</table>
+								<input style="border-radius: 25%; padding: 0px 10px" id="mytable7" class="w3-button w3-xlarge w3-circle w3-black" type="button" value="+" onclick="addRow(this.id)">
+							</div>
+						</div>	
+						<div class="form-row" style="margin-bottom: 20px; flex-flow: nowrap">
+							<label for="">
+								Ha mai subito interventi?
+							</label>
+							<div class="form-holder">
+								<div class="checkbox-circle" style=" display: grid; justify-content: center">								
+									<label class="yes">
+										<input type="radio" name="Ha_mai_subito_interventi" value="Si" checked>Si<br>
+										<span class="checkmark"></span>
+									</label>
+									<label class="no">
+										<input type="radio" name="Ha_mai_subito_interventi" value="No"> No<br>
+										<span class="checkmark"></span>
+									</label>
+								</div>
+							</div>
+						</div>	
+						<div class="form-row"  style="margin-bottom: 20px; flex-flow: nowrap">
+							<div class="form-holder">
+								<table id="mytable10"  class="table table-bordered " style="width: 150%; color: #ffffff" >
+									<thead class="table-dark">
+									<tr >
+										<th rowspan="2">Tipologia intervento</th>
+										<th rowspan="2">Patologia trattata</th>
+										<th rowspan="2">Anno intervento</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr>
+										<td><input class="form-control" type="text" name="Tipologia_intervento"></td>
+										<td><input class="form-control" type="text" name="Patologia_trattata"></td>
+										<td><input class="form-control" type="text" name="Anno_intervento"></td>
+									</tr>
+									
+									</tbody>
+								</table>
+								<input style="border-radius: 25%; padding: 0px 10px" id="mytable10" class="w3-button w3-xlarge w3-circle w3-black" type="button" value="+" onclick="addRow(this.id)">
+							</div>
+						</div>				
+					</section>
+					
+					<!-- SECTION 7 -->
+					<h4></h4>
+					<section>
+						<div class="form-row" style="margin-bottom: 20px; flex-flow: nowrap">
+							<label for="">
+								Malattia dell'infanzia ?
+							</label>
+							<div class="form-holder">
+								<div class="checkbox-circle" style=" display: grid; justify-content: center">								
+									<label class="yes">
+										<input type="radio" name="Malattia_dell_infanzia" value="Si" checked>Si<br>
+										<span class="checkmark"></span>
+									</label>
+									<label class="no">
+										<input type="radio" name="Malattia_dell_infanzia" value="No"> No<br>
+										<span class="checkmark"></span>
+									</label>
+								</div>
+							</div>
+						</div>	
+						<div class="form-row"  style="margin-bottom: 20px; flex-flow: nowrap">
+							<div class="form-holder">
+								<table id="mytable11"  class="table table-bordered " style="width: 150%; color: #ffffff" >
+									<thead class="table-dark">
+									<tr >
+										<th rowspan="2">Malattia </th>
+										<th rowspan="2">Eta in cui si è manifestata</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr>
+										<td><input class="form-control"  name="Malattia"></td>
+										<td><input class="form-control" name="Eta_in_cui_si_è_manifestat"></td>
+									</tr>
+									
+									</tbody>
+								</table>
+								<input style="border-radius: 25%; padding: 0px 10px" id="mytable11" class="w3-button w3-xlarge w3-circle w3-black" type="button" value="+" onclick="addRow(this.id)">
+							</div>
+						</div>	
+						<div class="form-row" style="margin-bottom: 20px; flex-flow: nowrap">
+							<label for="">
+								Ha mai subito traumi?
+							</label>
+							<div class="form-holder">
+								<div class="checkbox-circle" style=" display: grid; justify-content: center">								
+									<label class="yes">
+										<input type="radio" name="Ha_mai_subito_traumi" value="Si" checked>Si<br>
+										<span class="checkmark"></span>
+									</label>
+									<label class="no">
+										<input type="radio" name="Ha_mai_subito_traumi" value="No"> No<br>
+										<span class="checkmark"></span>
+									</label>
+								</div>
+							</div>
+						</div>	
+						<div class="form-row"  style="margin-bottom: 20px; flex-flow: nowrap">
+							<div class="form-holder">
+								<table id="mytable12"  class="table table-bordered " style="width: 150%; color: #ffffff" >
+									<thead class="table-dark">
+									<tr >
+										<th rowspan="2">Tipologia trauma</th>
+										<th rowspan="2">Causa</th>
+										<th rowspan="2">Anno trauma</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr>
+										<td><input class="form-control" type="text" name="Tipologia_trauma"></td>
+										<td><input class="form-control" type="text" name="Causa"></td>
+										<td><input class="form-control" type="text" name="Anno_trauma"></td>
+									</tr>
+									
+									</tbody>
+								</table>
+								<input style="border-radius: 25%; padding: 0px 10px" id="mytable12" class="w3-button w3-xlarge w3-circle w3-black" type="button" value="+" onclick="addRow(this.id)">
+							</div>
+						</div>				
+					</section>
+
+					<!-- SECTION 8 -->
+					<h4></h4>
+					<section>
+						<div class="form-row" style="margin-bottom: 20px; flex-flow: nowrap">
+							<label for="">
+								Soffre di allergie ?
+							</label>
+							<div class="form-holder">
+								<div class="checkbox-circle" style=" display: grid; justify-content: center">								
+									<label class="yes">
+										<input type="radio" name="Soffre_di_allergie" value="Si" checked>Si<br>
+										<span class="checkmark"></span>
+									</label>
+									<label class="no">
+										<input type="radio" name="Soffre_di_allergie" value="No"> No<br>
+										<span class="checkmark"></span>
+									</label>
+								</div>
+							</div>
+						</div>	
+						<div class="form-row"  style="margin-bottom: 20px; flex-flow: nowrap">
+							<div class="form-holder">
+								<table id="mytable13"  class="table table-bordered " style="width: 150%; color: #ffffff" >
+									<thead class="table-dark">
+									<tr >
+										<th rowspan="2">Allergia </th>
+										<th rowspan="2">Eta in cui si è manifestata</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr>
+										<td><input class="form-control" type="text" name="Allergia"></td>
+										<td><input class="form-control" type="text" name="Eta_in_cui_si_è_manifestata"></td>
+									</tr>
+									
+									</tbody>
+								</table>
+								<input style="border-radius: 25%; padding: 0px 10px" id="mytable13" class="w3-button w3-xlarge w3-circle w3-black" type="button" value="+" onclick="addRow(this.id)">
+							</div>
+						</div>	
+						<div class="form-row" style="margin-bottom: 20px; flex-flow: nowrap">
+							<label for="">
+								Soffre di diabete?
+							</label>
+							<div class="form-holder">
+								<div class="checkbox-circle" style=" display: grid; justify-content: center">								
+									<label class="yes">
+										<input type="radio" name="Soffre_di_diabete" value="Si" checked>Si<br>
+										<span class="checkmark"></span>
+									</label>
+									<label class="no">
+										<input type="radio" name="Soffre_di_diabete" value="No"> No<br>
+										<span class="checkmark"></span>
+									</label>
+								</div>
+							</div>
+						</div>	
+						<div class="form-row"  style="margin-bottom: 20px; flex-flow: nowrap">
+							<div class="form-holder">
+								<table id="mytable14"  class="table table-bordered " style="width: 150%; color: #ffffff" >
+									<thead class="table-dark">
+									<tr >
+										<th rowspan="2">Tipologia diabete</th>
+										<th rowspan="2">Da quanto tempo</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr>
+										<td><input class="form-control" type="text" name="Tipologia_diabete"></td>
+										<td><input class="form-control" type="text" name="Da_quanto_tempo1"></td>
+									</tr>
+									
+									</tbody>
+								</table>
+								<input style="border-radius: 25%; padding: 0px 10px" id="mytable14" class="w3-button w3-xlarge w3-circle w3-black" type="button" value="+" onclick="addRow(this.id)">
+							</div>
+						</div>				
+					</section>
+
+					<!-- SECTION 9 -->
+					<h4></h4>
+					<section>
+						<div class="form-row" style="margin-bottom: 20px; flex-flow: nowrap">
+							<label for="">
+								E' cardiopatica? 
+							</label>
+							<div class="form-holder">
+								<div class="checkbox-circle" style=" display: grid; justify-content: center">								
+									<label class="yes">
+										<input type="radio" name="E_cardiopatica" value="Si" checked>Si<br>
+										<span class="checkmark"></span>
+									</label>
+									<label class="no">
+										<input type="radio" name="E_cardiopatica" value="No"> No<br>
+										<span class="checkmark"></span>
+									</label>
+								</div>
+							</div>
+						</div>	
+						<div class="form-row"  style="margin-bottom: 20px; flex-flow: nowrap">
+							<div class="form-holder">
+								<table id="mytable15"  class="table table-bordered " style="width: 150%; color: #ffffff" >
+									<thead class="table-dark">
+									<tr >
+										<th rowspan="2">Problema cardiologica </th>
+										<th rowspan="2">Da quanto tempo</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr>
+										<td><input class="form-control" type="text" name="Problema_cardiologica"></td>
+										<td><input class="form-control" type="text" name="Da_quanto_tempo2"></td>
+									</tr>
+									
+									</tbody>
+								</table>
+								<input style="border-radius: 25%; padding: 0px 10px" id="mytable15" class="w3-button w3-xlarge w3-circle w3-black" type="button" value="+" onclick="addRow(this.id)">
+							</div>
+						</div>	
+						<div class="form-row" style="margin-bottom: 20px; flex-flow: nowrap">
+							<label for="">
+								Assume farmaci?
+							</label>
+							<div class="form-holder">
+								<div class="checkbox-circle" style=" display: grid; justify-content: center">								
+									<label class="yes">
+										<input type="radio" name="Assume_farmaci" value="Si" checked>Si<br>
+										<span class="checkmark"></span>
+									</label>
+									<label class="no">
+										<input type="radio" name="Assume_farmaci" value="No"> No<br>
+										<span class="checkmark"></span>
+									</label>
+								</div>
+							</div>
+						</div>	
+						<div class="form-row"  style="margin-bottom: 20px; flex-flow: nowrap">
+							<div class="form-holder">
+								<table id="mytable16"  class="table table-bordered " style="width: 150%; color: #ffffff" >
+									<thead class="table-dark">
+									<tr >
+										<th rowspan="2">Fermaco</th>
+										<th rowspan="2">Dosaggio</th>
+										<th rowspan="2">Frequenza</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr>
+										<td><input class="form-control" type="text" name="Fermaco"></td>
+										<td><input class="form-control" type="text" name="Dosaggio"></td>
+										<td><input class="form-control" type="text" name="Frequenza3"></td>
+									</tr>
+									
+									</tbody>
+								</table>
+								<input style="border-radius: 25%; padding: 0px 10px" id="mytable16" class="w3-button w3-xlarge w3-circle w3-black" type="button" value="+" onclick="addRow(this.id)">
+							</div>
+						</div>				
+					</section>
+
+					<!-- SECTION 10 -->
+					<h4></h4>
+					<section>
+						<div class="form-row" style="margin-bottom: 20px; flex-flow: nowrap">
+							<label for="">
+							 Altre patologie ?
+							</label>
+							<div class="form-holder">
+								<div class="checkbox-circle" style=" display: grid; justify-content: center">								
+									<label class="yes">
+										<input type="radio" name="Altre_patologie" value="Si" checked>Si<br>
+										<span class="checkmark"></span>
+									</label>
+									<label class="no">
+										<input type="radio" name="Altre_patologie" value="No"> No<br>
+										<span class="checkmark"></span>
+									</label>
+								</div>
+							</div>
+						</div>	
+						<div class="form-row"  style="margin-bottom: 20px; flex-flow: nowrap">
+							<div class="form-holder">
+								<table id="mytable17"  class="table table-bordered " style="width: 150%; color: #ffffff" >
+									<thead class="table-dark">
+									<tr >
+										<th rowspan="2">Patologie </th>
+										<th rowspan="2">Da quanto tempo</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr>
+										<td><input class="form-control" type="text" name="Patologie"></td>
+										<td><input class="form-control" type="text" name="Da_quanto_tempo3"></td>
+									</tr>
+									
+									</tbody>
+								</table>
+								<input style="border-radius: 25%; padding: 0px 10px" id="mytable17" class="w3-button w3-xlarge w3-circle w3-black" type="button" value="+" onclick="addRow(this.id)">
+							</div>
+						</div>	
+						
+						<div class="checkbox-circle" style="margin-bottom: 48px;">
+							<label>
+								<input type="checkbox" checked>I agree all statement and Terms & Conditions
+								<span class="checkmark"></span>
+							</label>
+						</div>				
+					</section>			
+            	</div>
+				<input type="hidden" name="p_id" id="doc_id" step="1"  value={{p_id}}  />
+				<input type="hidden" name="p_name" id="doc_id" step="1" value={{p_name}} />  
+				<!-- <input type="submit"  > -->
+            </form>
+		<script>
+			
+		function onSubmit( form ){
+				var data =JSON.stringify($(form).serializeArray()); 
+				var o = {};
+				var a = $.parseJSON(data);
+				// console.log( data );
+				let dict={}
+				$.each(a, function() {
+								if (o[this.name] !== undefined) {
+									if (!o[this.name].push) {
+										o[this.name] = [o[this.name]];
+									}
+									o[this.name].push(this.value || '');
+								} else {
+									o[this.name] = this.value || '';
+								}
+							});
+		
+    			console.log(o)
+				$.ajax({
+        				type: 'POST',
+						dataType: "json",
+       					url: 'anamnesi_personale',
+        				data:  JSON.stringify(o),
+						// contentType : 'application/json',
+						timeout: 1000,
+		
+    				});
+				
+				window.location.href = "form_pdf?{{p_id}}";
+				console.log("DONE")
+				return false
+			}
+			
+			
+		</script>
+		
+		<script src="{% static 'home/js/jquery-3.3.1.min.js'  %}"></script>
+		
+		<!-- JQUERY STEP -->
+		<script src="{% static 'home/js/jquery.steps.js'  %}"></script>
+
+		<!-- DATE-PICKER -->
+		<script src="{% static 'home/vendor/date-picker/js/datepicker.js'  %}"></script>
+		<script src="{% static 'home/vendor/date-picker/js/datepicker.en.js'  %}"></script>
+
+		<script src="{% static 'home/js/main.js'  %}"></script>
+
+</body>
+</html>

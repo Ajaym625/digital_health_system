@@ -1,0 +1,44 @@
+{% include 'home/header.html' %}
+{% load widget_tweaks %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Digital Health System</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-item nav-link" href="{% url 'dashboard_doctor' %}">Home</a>
+      </li>
+      <li class="nav-item active">
+          <a href="/logout" class="nav-item nav-link"> Logout</a>
+      </li>  
+    </ul>
+  </div>
+</nav>
+<header id="header" class="header">
+    <div class="container">
+      <a class="btn btn-primary" style="float: right;" href="{% url 'visualize_patient' %}">Back</a>
+        <h2 style="font-size: 3rem; text-align: center; margin-top: 53px;" ><span style="color: rgb(88, 6, 240);">Auto Diagnosis Output</span></h2>
+                <table class="table table-light table-striped table-bordered table-hover" style="margin-left: 250px; margin-top: 35px; width: 50%" >
+                    <thead class="table-dark" >
+                        <tr>
+                            <th style="text-align: center">Patologies</th>
+                            <th>Patologies Weight</th>
+                        </tr>
+                    </thead>
+                  
+                    {% for k,v in sortedDict.items %}  
+                        <tr class="table-danger">                             
+                            <td style="font-size: large; text-align: center">{{k}}</td>
+                            <td style="font-size: large;">{{v}}</td>
+                        </tr>
+                        {% endfor %}
+                </table>
+            </form>
+            <img style="margin-left: 250px;border:solid 2px" src="http://127.0.0.1:8000/media/graph/graph.png" alt="Trulli" width="550" height="433">
+{% include 'home/footer.html' %}
+
+
+
